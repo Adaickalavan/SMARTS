@@ -21,17 +21,21 @@ jobs:
         python -m pip install --upgrade pip
         pip install .[train,dev]
         pip install -r requirements.txt
-        pip install wheel twine
+        pip install twine
     - name: Build SMARTS
       run: |
         make wheel
-      # python setup.py sdist bdist_wheel
     - name: Twine check 
       run: |
         twine check dist/*    
     - name: Publish to PyPI
-      env:
-        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-      run: |
-        twine upload dist/*
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN }}
+    # - name: Publish to PyPI
+    #   env:
+    #     TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+    #     TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+    #   run: |
+    #     twine upload dist/*
