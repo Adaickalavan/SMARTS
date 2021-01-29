@@ -1,15 +1,13 @@
-name: SAMRTS CD PyPI
+name: SMARTS CD PyPI
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   package:
     runs-on: ubuntu-18.04
     steps:
-    # Checkout the repository to master
-    # and use it as the current working directory
     - name: Checkout
       uses: actions/checkout@v2
     - name: Setup Python
@@ -22,20 +20,14 @@ jobs:
         pip install .[train,dev]
         pip install -r requirements.txt
         pip install twine
-    - name: Build SMARTS
+    - name: Build SMARTS binary wheel
       run: |
         make wheel
     - name: Twine check 
       run: |
         twine check dist/*    
-    - name: Publish to PyPI
+    - name: Publish SMARTS to PyPI
       uses: pypa/gh-action-pypi-publish@master
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
-    # - name: Publish to PyPI
-    #   env:
-    #     TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-    #     TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-    #   run: |
-    #     twine upload dist/*

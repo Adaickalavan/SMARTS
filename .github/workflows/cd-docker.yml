@@ -6,7 +6,7 @@ on:
 
 jobs:
   docker:
-    name: Push Docker image to DockerHub
+    name: Build and push Docker image to DockerHub
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout repository
