@@ -1,0 +1,37 @@
+name: SAMRTS CD PyPI
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  package:
+    runs-on: ubuntu-18.04
+    steps:
+    # Checkout the repository to master
+    # and use it as the current working directory
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.7"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install .[train]
+        pip install -r requirements.txt
+        pip install wheel twine
+    - name: Build SMARTS
+      run: |
+        make wheel
+      # python setup.py sdist bdist_wheel
+    - name: Twine check
+      run: |
+        twine check dist/*    
+    - name: Publish to PyPI
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        twine upload dist/*
