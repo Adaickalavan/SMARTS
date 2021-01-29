@@ -6,11 +6,11 @@ with open(path.join(this_dir, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name="simsmart",
+    name="smarts",
     description="Scalable Multi-Agent RL Training School",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    version="0.4.16",
+    version="0.4.12",
     packages=find_packages(exclude="tests"),
     include_package_data=True,
     zip_safe=True,
