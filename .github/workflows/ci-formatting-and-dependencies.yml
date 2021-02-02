@@ -14,6 +14,8 @@ jobs:
       - run: echo "Github repository ====== ${{github.repository}}"
       - run: echo "what is it ===== github.event.pull_request.head.repo.full_name"
       - run: echo "what is it ===== ${{github.event.pull_request.head.repo.full_name}}"
+      - run: echo "github base ref ${{ github.base_ref }}"
+      - run: echo ${{ github.base_ref }}
       - name: Checkout
         uses: actions/checkout@v2
       - name: Check Black code format
