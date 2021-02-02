@@ -20,6 +20,8 @@ jobs:
     steps:
       - run: echo "Repository name ====== $REPOSITORY_NAME"
       - run: echo "Github repository ====== ${{github.repository}}"
+      - run: echo "what is it ===== github.event.pull_request.head.repo.full_name"
+      - run: echo "what is it ===== ${{github.event.pull_request.head.repo.full_name}}"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup X11

@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-18.04
     container: huaweinoah/smarts:v0.4.3-pre
     steps:
+      - run: echo "Repository name ====== $REPOSITORY_NAME"
+      - run: echo "Github repository ====== ${{github.repository}}"
+      - run: echo "what is it ===== github.event.pull_request.head.repo.full_name"
+      - run: echo "what is it ===== ${{github.event.pull_request.head.repo.full_name}}"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Check Black code format
