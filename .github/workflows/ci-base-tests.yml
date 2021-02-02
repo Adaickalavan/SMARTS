@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-18.04
-    if: github.event_name == ‘push’ || github.event.pull_request.head.repo.full_name != github.repository
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     container: huaweinoah/smarts:v0.4.3-pre
     strategy:
       matrix:
@@ -18,10 +18,6 @@ jobs:
           - ./smarts/sstudio
           - ./tests
     steps:
-      - run: echo "Repository name ====== $REPOSITORY_NAME"
-      - run: echo "Github repository ====== ${{github.repository}}"
-      - run: echo "what is it ===== github.event.pull_request.head.repo.full_name"
-      - run: echo "what is it ===== ${{github.event.pull_request.head.repo.full_name}}"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup X11
