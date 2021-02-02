@@ -18,6 +18,8 @@ jobs:
           - ./smarts/sstudio
           - ./tests
     steps:
+      - run: echo "Repository name ====== $REPOSITORY_NAME"
+      - run: echo "Github repository ====== ${{github.repository}}"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup X11
